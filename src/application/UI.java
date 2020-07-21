@@ -59,11 +59,17 @@ public class UI {
 		printCapturedPieces(captured);
 		System.out.println();
 		System.out.println("Turno : " + chessMatch.getTurn());
-		System.out.println("Esperando o jogador " + chessMatch.getCurrentPlayer()+ " jogar.");
-		if (chessMatch.getCheck()) {
-			System.out.println("CHECK!!!!");
+		if(!chessMatch.getCheckMate()) {
+			System.out.println("Esperando o jogador " + chessMatch.getCurrentPlayer()+ " jogar.");
+			if (chessMatch.getCheck()) {
+				System.out.println("CHECK!");
+			}
 		}
-	}
+		else {
+			System.out.println("CHECKMATE!!!!!!");
+			System.out.println("O VENCEDOR E " + chessMatch.getCurrentPlayer());
+		}
+	}	
 	
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
@@ -111,12 +117,12 @@ public class UI {
 		List<ChessPiece> black = captured.stream().filter(x-> x.getColor()== Color.BLACK).collect(Collectors.toList());
 		
 		System.out.println("Captured pieces:");
-		System.out.print("White: ");
+		System.out.print("WHITE: ");
 		System.out.print(ANSI_WHITE);
 		System.out.println(Arrays.deepToString(white.toArray()));
 		System.out.println(ANSI_RESET);
 		System.out.println("Captured pieces:");
-		System.out.print("Black: ");
+		System.out.print("BLACK: ");
 		System.out.print(ANSI_RED);
 		System.out.println(Arrays.deepToString(black.toArray()));
 		System.out.println(ANSI_RESET);
